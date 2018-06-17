@@ -25,27 +25,16 @@ module.exports = (vertices, edges, {
   destination_exchange,
   destination_currency
 }) => {
-  // console.log('vertices', vertices);
-  // console.log('edges', edges);
-  // console.log(source_exchange, source_currency, destination_exchange, destination_currency);
-
   let rate = mapValues(edges, edge => mapValues(edge, value => value.weight));
   let next = {};
 
   entries(edges).forEach(([u, edgeCollection]) => {
-    // console.log('u', u);
-    // console.log('edgeCollection', edgeCollection);
-
     const path = reduce(edgeCollection, (result, value, key) => {
       result[key] = key;
       return result;
     }, {});
-    // console.log('path', path);
     set(next, u, path);
   });
-
-  // console.log('rate', rate);
-  // console.log('next', next);
 
   forEach(vertices, k => {
     forEach(vertices, i => {
@@ -59,12 +48,9 @@ module.exports = (vertices, edges, {
     });
   });
 
-  // console.log('rate', rate);
-  // console.log('next', next);
   const source = generateVertex(source_exchange, source_currency);
   const destination = generateVertex(destination_exchange, destination_currency);
   if (!getNext(next, source, destination)) {
-    // console.log('empty');
     return undefined;
   }
   const path = [source];

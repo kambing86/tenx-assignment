@@ -12,8 +12,6 @@ const {
   pathString,
 } = require('./utils');
 
-const findBestRate = require('./findBestRate');
-
 let vertices = [];
 const edges = {};
 
