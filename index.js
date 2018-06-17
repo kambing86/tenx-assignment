@@ -56,7 +56,10 @@ function setSameCurrencyEdges(newVertex, currency) {
     if (isSameCurrency) {
       set(edges, pathString(vertex, newVertex), {
         weight: 1,
-      })
+      });
+      set(edges, pathString(newVertex, vertex), {
+        weight: 1,
+      });
     }
   });
 }
