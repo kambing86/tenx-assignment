@@ -24,7 +24,7 @@ const rl = readline.createInterface({
 
 const regexInput = /^(?<timestamp>\S+)\s(?<exchange>\S+)\s(?<source_currency>\S+)\s(?<destination_currency>\S+)\s(?<forward_factor>\d+\.*\d*)\s(?<backward_factor>\d+\.*\d*)$/gm;
 const regexRequest = /^EXCHANGE_RATE_REQUEST\s(?<source_exchange>\S+)\s(?<source_currency>\S+)\s(?<destination_exchange>\S+)\s(?<destination_currency>\S+)$/gm;
-const sameCurrencyRegex = (currency) => new RegExp(`^\\S+\\s${currency}$`);
+const regexSameCurrency = (currency) => new RegExp(`^\\S+\\s${currency}$`);
 
 function setVertices(vertex) {
   vertices = uniq(vertices.concat(vertex));
@@ -51,7 +51,7 @@ function setSameCurrencyEdges(newVertex, currency) {
     if (vertex === newVertex) {
       return;
     }
-    const isSameCurrency = sameCurrencyRegex(currency).test(vertex);
+    const isSameCurrency = regexSameCurrency(currency).test(vertex);
     if (isSameCurrency) {
       set(edges, pathString(vertex, newVertex), {
         weight: 1,
