@@ -51,7 +51,7 @@ module.exports = (vertices, edges, {
   const source = generateVertex(source_exchange, source_currency);
   const destination = generateVertex(destination_exchange, destination_currency);
   if (!getNext(next, source, destination)) {
-    return undefined;
+    return {};
   }
   const path = [source];
   let currentPos = source;

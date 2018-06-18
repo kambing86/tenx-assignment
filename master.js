@@ -104,14 +104,13 @@ function processRequest(matches) {
       bestRate,
       path
     } = result;
-    if (isNil(path)) {
-      return;
+    if (!isNil(path)) {
+      console.log(`BEST_RATES_BEGIN ${source_exchange} ${source_currency} ${destination_exchange} ${destination_currency} ${bestRate}`);
+      path.forEach(vertex => {
+        console.log(vertex.split(' ').join(', '));
+      })
+      console.log('BEST_RATES_END');
     }
-    console.log(`BEST_RATES_BEGIN ${source_exchange} ${source_currency} ${destination_exchange} ${destination_currency} ${bestRate}`);
-    path.forEach(vertex => {
-      console.log(vertex.split(' ').join(', '));
-    })
-    console.log('BEST_RATES_END');
     worker.kill();
   });
 }
